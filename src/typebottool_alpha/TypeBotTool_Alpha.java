@@ -21,3 +21,12 @@ public class TypeBotTool_Alpha {
     }
     
 }
+
+/*
+    *is able to read uppercase letters
+    *added compatibility for some characters
+    *added functional status indicator
+
+    -fix multiple starting
+    -accepts only certain characters
+*/

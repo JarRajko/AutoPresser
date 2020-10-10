@@ -6,12 +6,14 @@
 package typebottool_alpha.keyboard;
 
 import java.awt.AWTException;
+import java.awt.Color;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.KeyStroke;
+import typebottool_alpha.gui.InfoFrame;
 
 /**
  *
@@ -24,8 +26,10 @@ public class Keyboard extends TimerTask {
     private String stringToType;
     private int keysTyped = 0;
     private boolean paused = false;
+    private InfoFrame frame;
 
-    public Keyboard(String stringToType, int delay_ms) {
+    public Keyboard(String stringToType, int delay_ms, InfoFrame frame) {
+        this.frame = frame;
         try {
             this.delay_ms = delay_ms;
             this.stringToType = stringToType;
@@ -37,22 +41,28 @@ public class Keyboard extends TimerTask {
 
     @Override
     public void run() {
+
+        if (keysTyped == 0) {
+            startedTyping();
+        } else if (keysTyped == stringToType.length()) {
+            endedTyping();
+        }
+
         if (keysTyped < stringToType.length()) {
             try {
-
                 if (Character.isUpperCase(stringToType.charAt(keysTyped))) {
-                    robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(KeyEvent.VK_SHIFT));
-                    robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(stringToType.charAt(keysTyped)));
-                    robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(stringToType.charAt(keysTyped)));
-                    robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(stringToType.charAt(KeyEvent.VK_SHIFT)));
+                    robot.keyPress(KeyEvent.VK_SHIFT);
+                    KeyStroke ks = KeyStroke.getKeyStroke(stringToType.toLowerCase().charAt(keysTyped), 0);
+                    robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(ks.getKeyCode()));
+                    robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(ks.getKeyCode()));
+                    robot.keyRelease(KeyEvent.VK_SHIFT);
                 } else {
                     robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(stringToType.charAt(keysTyped)));
                     robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(stringToType.charAt(keysTyped)));
                 }
-
+                frame.changeKeyboardStatus(stringToType.charAt(keysTyped) + "");
+                frame.changeKeyboardStatusColor(new Color(0, 250, 0));
             } catch (IllegalArgumentException e) {
-                System.out.println("Errornous character: " + stringToType.charAt(keysTyped));
-
                 if (stringToType.charAt(keysTyped) == '!') {
                     robot.keyPress(KeyEvent.VK_SHIFT);
                     robot.keyPress(KeyEvent.VK_1);
@@ -115,10 +125,17 @@ public class Keyboard extends TimerTask {
                 } else if (stringToType.charAt(keysTyped) == ';') {
                     robot.keyPress(KeyEvent.VK_SEMICOLON);
                     robot.keyRelease(KeyEvent.VK_SEMICOLON);
+                } else {
+                    System.out.println("Errornous character: " + stringToType.charAt(keysTyped));
+                    frame.changeKeyboardStatusColor(new Color(255, 0, 0));
                 }
+
+                frame.changeKeyboardStatus(stringToType.charAt(keysTyped) + "");
 
             } catch (Exception e) {
                 e.printStackTrace();
+                frame.changeKeyboardStatusColor(new Color(255, 0, 0));
+                frame.changeKeyboardStatus("Error has occured!");
             }
             keysTyped++;
         } else {
@@ -139,6 +156,7 @@ public class Keyboard extends TimerTask {
     public void stopTyping() {
         cancel();
         keysTyped = 0;
+        endedTyping();
     }
 
     public int getTypingDelay() {
@@ -148,5 +166,16 @@ public class Keyboard extends TimerTask {
     public boolean isPaused() {
         return this.paused;
     }
+
+    public void startedTyping() {
+        frame.changeKeyboardStatusColor(new Color(0, 255, 0));
+        frame.changeKeyboardStatus("Typing... ");
+    }
+
+    public void endedTyping() {
+        frame.setKeyboardStatusIdle();
+    }
+
+    
 
 }
