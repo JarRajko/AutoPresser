@@ -5,7 +5,7 @@
  */
 package typebottool_alpha;
 
-import typebottool_alpha.giu.UI;
+import typebottool_alpha.gui.UI;
 
 /**
  *
