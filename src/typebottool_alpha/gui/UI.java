@@ -5,6 +5,7 @@
  */
 package typebottool_alpha.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyListener;
@@ -42,6 +43,7 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
     private Keyboard keyboard;
     private Timer timer = new Timer();
     private String textToFinish = "";
+    private InfoFrame frame;
 
     /**
      * Creates new form UI
@@ -50,7 +52,7 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
         initComponents();
         this.delaySlider.setMaximum(200);
         this.delaySlider.setMinimum(1);
-        this.delaySlider.setValue(1);
+        this.delaySlider.setValue(100);
         this.delayLabel.setText("Delay for letters (ms) " + delaySlider.getValue());
         this.delaySlider.addChangeListener(new javax.swing.event.ChangeListener() {
             @Override
@@ -61,7 +63,7 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
 
         // Get the logger for "org.jnativehook" and set the level to warning.
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-        logger.setLevel(Level.OFF);             // TODO Nastaviť na WARNING
+        logger.setLevel(Level.OFF);
 
         // Don't forget to disable the parent handlers.
         //logger.setUseParentHandlers(false);
@@ -80,6 +82,7 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
         int height = (int) screenSize.getHeight();
 
         this.setLocation((width / 2) - this.getWidth() / 2, (height / 2) - this.getHeight() / 2);
+        frame = new InfoFrame();
     }
 
     /**
@@ -291,21 +294,24 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent nke) {
+
         if (nke.getKeyCode() == KeyBind.START.getKeyCode()) {
-            keyboard = new Keyboard(jTextArea1.getText(), this.delaySlider.getValue());
+            keyboard = new Keyboard(jTextArea1.getText(), this.delaySlider.getValue(), frame);
             timer.schedule(keyboard, 0, keyboard.getTypingDelay());
         } else if (nke.getKeyCode() == KeyBind.CANCEL.getKeyCode()) {
             keyboard.stopTyping();
+            frame.setKeyboardStatus("Typing cancelled by user.");
         } else if (nke.getKeyCode() == KeyBind.CLOSE_APP.getKeyCode()) {
             System.out.println("User exiting application...");
             System.exit(0);
         } else if (nke.getKeyCode() == KeyBind.PAUSE_TYPING.getKeyCode()) {
             if (keyboard.isPaused()) {
-//                keyboard.resumeTyping();
-                keyboard = new Keyboard(textToFinish, this.delaySlider.getValue());
+                keyboard = new Keyboard(textToFinish, this.delaySlider.getValue(), frame);
                 timer.schedule(keyboard, 0, keyboard.getTypingDelay());
             } else {
                 textToFinish = keyboard.pauseTyping();
+                frame.changeKeyboardStatus("Typing paused");
+                frame.changeKeyboardStatusColor(new Color(255, 150, 0));
             }
         }
 
