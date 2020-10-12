@@ -16,7 +16,6 @@ add and remove prefixes.
 
 Keyboard control: 
 
-Start -F2
-Cancel typing -F3
-Pause typing -F5
-Force exit - F12
+  Start / Pause - F5
+  Cancel typing -F3
+  Force exit - F12
