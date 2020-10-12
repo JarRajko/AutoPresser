@@ -42,7 +42,6 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
 
     private Keyboard keyboard;
     private Timer timer = new Timer();
-    private String textToFinish = "";
     private InfoFrame frame;
 
     /**
@@ -295,24 +294,31 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
     @Override
     public void nativeKeyPressed(NativeKeyEvent nke) {
 
-        if (nke.getKeyCode() == KeyBind.START.getKeyCode()) {
-            keyboard = new Keyboard(jTextArea1.getText(), this.delaySlider.getValue(), frame);
-            timer.schedule(keyboard, 0, keyboard.getTypingDelay());
+        if (nke.getKeyCode() == KeyBind.START_STOP.getKeyCode()) {
+            if (keyboard == null) {
+                keyboard = new Keyboard(jTextArea1.getText(), this.delaySlider.getValue(), frame);
+                timer.schedule(keyboard, 0, keyboard.getTypingDelay());
+            } else if (keyboard.isPaused()) {
+                int keysTyped = keyboard.getKeysTyped();
+                keyboard = new Keyboard(jTextArea1.getText(), this.delaySlider.getValue(), frame);
+                keyboard.setKeysTyped(keysTyped);
+                timer.schedule(keyboard, 0, keyboard.getTypingDelay());
+            } else if (keyboard.getKeysTyped() != 0) {
+                keyboard.pauseTyping();
+                frame.changeKeyboardStatus("Typing paused");
+                frame.changeKeyboardStatusColor(new Color(255, 150, 0));
+            } else {
+                keyboard = new Keyboard(jTextArea1.getText(), this.delaySlider.getValue(), frame);
+                timer.schedule(keyboard, 0, keyboard.getTypingDelay());
+            }
         } else if (nke.getKeyCode() == KeyBind.CANCEL.getKeyCode()) {
             keyboard.stopTyping();
             frame.setKeyboardStatus("Typing cancelled by user.");
         } else if (nke.getKeyCode() == KeyBind.CLOSE_APP.getKeyCode()) {
             System.out.println("User exiting application...");
             System.exit(0);
-        } else if (nke.getKeyCode() == KeyBind.PAUSE_TYPING.getKeyCode()) {
-            if (keyboard.isPaused()) {
-                keyboard = new Keyboard(textToFinish, this.delaySlider.getValue(), frame);
-                timer.schedule(keyboard, 0, keyboard.getTypingDelay());
-            } else {
-                textToFinish = keyboard.pauseTyping();
-                frame.changeKeyboardStatus("Typing paused");
-                frame.changeKeyboardStatusColor(new Color(255, 150, 0));
-            }
+        } else if (nke.getKeyCode() == KeyBind.START_STOP.getKeyCode()) {
+
         }
 
     }

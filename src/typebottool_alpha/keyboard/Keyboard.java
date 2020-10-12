@@ -42,10 +42,10 @@ public class Keyboard extends TimerTask {
     @Override
     public void run() {
 
-        if (keysTyped == 0) {
-            startedTyping();
-        } else if (keysTyped == stringToType.length()) {
+        if (keysTyped == stringToType.length()) {
             endedTyping();
+        } else {
+            startedTyping();
         }
 
         if (keysTyped < stringToType.length()) {
@@ -60,7 +60,7 @@ public class Keyboard extends TimerTask {
                     robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(stringToType.charAt(keysTyped)));
                     robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(stringToType.charAt(keysTyped)));
                 }
-                frame.changeKeyboardStatus(stringToType.charAt(keysTyped) + "");
+                frame.changeKeyboardStatus(keysTyped + " / " + stringToType.length() + " ( " + (double) (keysTyped * 100 / stringToType.length()) + "% )");
                 frame.changeKeyboardStatusColor(new Color(0, 250, 0));
             } catch (IllegalArgumentException e) {
                 if (stringToType.charAt(keysTyped) == '!') {
@@ -130,7 +130,7 @@ public class Keyboard extends TimerTask {
                     frame.changeKeyboardStatusColor(new Color(255, 0, 0));
                 }
 
-                frame.changeKeyboardStatus(stringToType.charAt(keysTyped) + "");
+                frame.changeKeyboardStatus(keysTyped + " / " + stringToType.length() + " ( " + (double) (keysTyped * 100 / stringToType.length()) + "% )");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -143,10 +143,13 @@ public class Keyboard extends TimerTask {
         }
     }
 
-    public String pauseTyping() {
+    public int pauseTyping() {
         paused = true;
         cancel();
-        return stringToType.substring(keysTyped, stringToType.length());
+        frame.changeKeyboardStatus("Typing paused");
+        frame.changeKeyboardStatusColor(new Color(255, 150, 0));
+//        return stringToType.substring(keysTyped, stringToType.length());
+        return keysTyped;
     }
 
     public void resumeTyping() {
@@ -169,13 +172,18 @@ public class Keyboard extends TimerTask {
 
     public void startedTyping() {
         frame.changeKeyboardStatusColor(new Color(0, 255, 0));
-        frame.changeKeyboardStatus("Typing... ");
     }
 
     public void endedTyping() {
         frame.setKeyboardStatusIdle();
     }
 
-    
+    public void setKeysTyped(int keysTyped) {
+        this.keysTyped = keysTyped;
+    }
+
+    public int getKeysTyped() {
+        return this.keysTyped;
+    }
 
 }
