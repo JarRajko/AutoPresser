@@ -159,7 +159,6 @@ public class Keyboard extends TimerTask {
         cancel();
         frame.changeKeyboardStatus("Typing paused");
         frame.changeKeyboardStatusColor(new Color(255, 150, 0));
-//        return stringToType.substring(keysTyped, stringToType.length());
         return keysTyped;
     }
 
