@@ -22,7 +22,7 @@ import typebottool_alpha.gui.UI;
  *
  * @author Rajko
  */
-public class TypeBotTool_Alpha {
+public class Main {
 
     /**
      * @param args the command line arguments

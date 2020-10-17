@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package typebottool_alpha.keyboard;
+package typebottool_alpha;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 
@@ -23,7 +23,7 @@ import org.jnativehook.keyboard.NativeKeyEvent;
  * @author Rajko
  */
 public enum KeyBind {
-//    START(NativeKeyEvent.VC_F2),
+    MOUSE_START_STOP(NativeKeyEvent.VC_F2),
     CANCEL(NativeKeyEvent.VC_F3),
     START_STOP(NativeKeyEvent.VC_F5),
     CLOSE_APP(NativeKeyEvent.VC_F12);

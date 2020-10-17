@@ -71,7 +71,7 @@ public class Keyboard extends TimerTask {
                     robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(stringToType.charAt(keysTyped)));
                     robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(stringToType.charAt(keysTyped)));
                 }
-                frame.changeKeyboardStatus(keysTyped + " / " + stringToType.length() + " ( " + (double) (keysTyped * 100 / stringToType.length()) + "% )");
+                frame.changeKeyboardStatus(keysTyped + " / " + stringToType.length() + "\n ( " + (double) (keysTyped * 100 / stringToType.length()) + "% )");
                 frame.changeKeyboardStatusColor(new Color(0, 250, 0));
             } catch (IllegalArgumentException e) {
                 if (stringToType.charAt(keysTyped) == '!') {
@@ -141,7 +141,7 @@ public class Keyboard extends TimerTask {
                     frame.changeKeyboardStatusColor(new Color(255, 0, 0));
                 }
 
-                frame.changeKeyboardStatus(keysTyped + " / " + stringToType.length() + " ( " + (double) (keysTyped * 100 / stringToType.length()) + "% )");
+                frame.changeKeyboardStatus(keysTyped + " / " + stringToType.length() + "\n ( " + (double) (keysTyped * 100 / stringToType.length()) + "% )");
 
             } catch (Exception e) {
                 e.printStackTrace();
