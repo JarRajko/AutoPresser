@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package typebottool_alpha.gui;
+package autopresser.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -32,8 +32,8 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+//import javafx.beans.value.ChangeListener;
+//import javafx.beans.value.ObservableValue;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
@@ -42,9 +42,9 @@ import org.jnativehook.NativeHookException;
 import org.jnativehook.dispatcher.SwingDispatchService;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-import typebottool_alpha.KeyBind;
-import typebottool_alpha.keyboard.Keyboard;
-import typebottool_alpha.mouse.Mouse;
+import autopresser.KeyBind;
+import autopresser.keyboard.Keyboard;
+import autopresser.mouse.Mouse;
 
 /**
  *
