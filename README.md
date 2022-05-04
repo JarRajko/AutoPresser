@@ -19,3 +19,4 @@ Keyboard control:
   Start / Pause - F5
   Cancel typing -F3
   Force exit - F12
+  Break program and make you restart computer because you are unable to use mouse - F2
