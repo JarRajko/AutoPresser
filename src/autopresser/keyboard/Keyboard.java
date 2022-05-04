@@ -136,6 +136,9 @@ public class Keyboard extends TimerTask {
                 } else if (stringToType.charAt(keysTyped) == ';') {
                     robot.keyPress(KeyEvent.VK_SEMICOLON);
                     robot.keyRelease(KeyEvent.VK_SEMICOLON);
+                } else if (stringToType.charAt(keysTyped) == '~') {
+                    robot.keyPress(KeyEvent.VK_ENTER);
+                    robot.keyRelease(KeyEvent.VK_ENTER);
                 } else {
                     System.out.println("Errornous character: " + stringToType.charAt(keysTyped));
                     frame.changeKeyboardStatusColor(new Color(255, 0, 0));
