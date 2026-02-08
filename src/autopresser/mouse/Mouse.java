@@ -58,17 +58,6 @@ public class Mouse extends Thread {
         }
     }
 
-    public void pause() {
-        run = false;
-        frame.changeMouseStatusColor(Color.orange);
-        frame.changeMouseStatus("PAUSED by user");
-    }
-
-    public void unpause() {
-        run = true;
-        frame.changeMouseStatusColor(Color.green);
-        frame.changeMouseStatus("Hovering mouse\n\t randomly.");
-    }
 
     public boolean isRunning() {
         return this.run;
