@@ -339,10 +339,8 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
 
         }*/ else if (nke.getKeyCode() == KeyBind.MOUSE_START_STOP.getKeyCode()) {
             if (mouse.isRunning()) {
-                mouse.pause();
                 System.out.println("paused");
             } else {
-                mouse.unpause();
                 mouse.run();
                 System.out.println("unpaused");
             }

@@ -54,20 +54,10 @@ public class InfoFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        mouseTextArea = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         keyboardTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        mouseTextArea.setEditable(false);
-        mouseTextArea.setBackground(new java.awt.Color(255, 255, 0));
-        mouseTextArea.setColumns(15);
-        mouseTextArea.setRows(3);
-        mouseTextArea.setText("Mouse status:     IDLE");
-        mouseTextArea.setToolTipText("");
-        jScrollPane2.setViewportView(mouseTextArea);
 
         keyboardTextArea.setEditable(false);
         keyboardTextArea.setBackground(new java.awt.Color(255, 255, 0));
@@ -81,15 +71,13 @@ public class InfoFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,9 +87,6 @@ public class InfoFrame extends javax.swing.JFrame {
         keyboardTextArea.setText(defaultKeyboardInfo + status);
     }
 
-    public void changeMouseStatus(String status) {
-        mouseTextArea.setText(defaultMouseInfo + status);
-    }
 
     public void changeKeyboardStatusColor(Color color) {
         keyboardTextArea.setBackground(color);
@@ -112,24 +97,15 @@ public class InfoFrame extends javax.swing.JFrame {
          changeKeyboardStatusColor(new Color(255, 255, 0));
     }
     
-    public void setMouseStatusIdle() {
-         mouseTextArea.setText(defaultMouseInfo + "IDLE");
-         changeMouseStatusColor(new Color(255, 255, 0));
-    }
 
-    public void changeMouseStatusColor(Color color) {
-        mouseTextArea.setBackground(color);
-    }
     
     public void setKeyboardStatus(String message) {
         keyboardTextArea.setText(message);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea keyboardTextArea;
-    private javax.swing.JTextArea mouseTextArea;
     // End of variables declaration//GEN-END:variables
 
     
