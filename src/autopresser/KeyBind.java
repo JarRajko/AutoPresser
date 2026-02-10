@@ -23,7 +23,6 @@ import org.jnativehook.keyboard.NativeKeyEvent;
  * @author Rajko
  */
 public enum KeyBind {
-    MOUSE_START_STOP(NativeKeyEvent.VC_F2),
     CANCEL(NativeKeyEvent.VC_F3),
     START_STOP(NativeKeyEvent.VC_F5),
     CLOSE_APP(NativeKeyEvent.VC_F12);

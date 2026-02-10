@@ -68,7 +68,7 @@
                   <Component id="delaySlider" max="32767" attributes="0"/>
                   <Component id="delayLabel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

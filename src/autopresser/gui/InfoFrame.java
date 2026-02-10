@@ -27,7 +27,6 @@ import java.awt.Toolkit;
 public class InfoFrame extends javax.swing.JFrame {
 
     private String defaultKeyboardInfo = "Keyboard status: ";
-    private String defaultMouseInfo =    "Mouse status   : ";
 
     /**
      * Creates new form InfoFrame

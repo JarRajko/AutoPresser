@@ -19,11 +19,8 @@ package autopresser.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,7 +41,6 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 import autopresser.KeyBind;
 import autopresser.keyboard.Keyboard;
-import autopresser.mouse.Mouse;
 
 /**
  *
@@ -55,14 +51,13 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
     private Keyboard keyboard;
     private Timer timer = new Timer();
     private InfoFrame frame;
-    private Mouse mouse;
 
     /**
      * Creates new form UI
      */
     public UI() {
         initComponents();
-        this.delaySlider.setMaximum(200);
+        this.delaySlider.setMaximum(300);
         this.delaySlider.setMinimum(1);
         this.delaySlider.setValue(100);
         this.delayLabel.setText("Delay for letters (ms) " + delaySlider.getValue());
@@ -96,8 +91,6 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
         this.setLocation((width / 2) - this.getWidth() / 2, (height / 2) - this.getHeight() / 2);
         frame = new InfoFrame();
 
-        mouse = new Mouse(frame);
-        mouse.start();
     }
 
     /**
@@ -204,7 +197,7 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(delaySlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(delayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -335,16 +328,7 @@ public class UI extends javax.swing.JFrame implements NativeKeyListener {
         } else if (nke.getKeyCode() == KeyBind.CLOSE_APP.getKeyCode()) {
             System.out.println("User exiting application...");
             System.exit(0);
-        } /*else if (nke.getKeyCode() == KeyBind.START_STOP.getKeyCode()) {
-
-        }*/ else if (nke.getKeyCode() == KeyBind.MOUSE_START_STOP.getKeyCode()) {
-            if (mouse.isRunning()) {
-                System.out.println("paused");
-            } else {
-                mouse.run();
-                System.out.println("unpaused");
-            }
-        }
+        } 
 
     }
 
